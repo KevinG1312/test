@@ -1,0 +1,12 @@
+apiVersion: backstage.io
+kind: Component
+metadata:
+    name: backstage-support-deployable
+    description: Deploy managed identity, and templates
+    annotations: 
+    dev.blala.test: poc-test-test
+    backstage-techdoc-ref: ditr:.
+spec:
+    type: resource
+    owner: digitalservice/java 
+    lifecycle: experimental
