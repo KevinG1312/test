@@ -3,7 +3,7 @@ kind: Component
 metadata:
     name: backstage-support-deployable
     description: Deploy managed identity, and templates
-        annotations: 
+    annotations: 
             dev.blala.test: poc-test-test
             backstage-techdoc-ref: ditr:.
 spec:
@@ -11,3 +11,4 @@ spec:
     owner: digitalservice/java 
 
     lifecycle: experimental
+
