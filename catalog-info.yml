@@ -10,5 +10,5 @@ spec:
     type: resource
     owner: digitalservice/java 
 
-    lifecycle: experimental
+    lifecycle: experimentals
 
