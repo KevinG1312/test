@@ -1,79 +1,68 @@
-apiVersion: backstage.io
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-    name: demo-component1-lib
+  name: demo-component1-lib
 spec:
-    type: website
-    system: notification
-    owner: group:digitalservicing
-    lifecycle: experimental
-    providesAPos:
-        - Api1
-    consumesApis:
-        -api3
-    dependsOn:
-        - resource:resource-1
-
----
-
-apiVersion: backstage.io/v1alpha1
-kind: API 
-metadata:
-    name: Api1
-    description: API provided by demo-component1-lib
-
-spec:
-    type: openapi
-    owner: group:digitalservicing
-    lifecycle: experimental
-    system: notifications
-
-    definition: |
-        openapi:"3.0.0"
-        info: 
-            title: Api1
-            version: 1.0.0
-        paths: 
-            /demo/example:
-                get:
-                    summary: Example endpoint
-                    responses: 
-                        '200': 
-                            description: success
-
+  type: website
+  system: notifications
+  owner: group:default/digitalservicing
+  lifecycle: experimental
+  providesApis:
+    - api:default/Api1
+  consumesApis:
+    - api:default/api3
+  dependsOn:
+    - resource:default/resource-1
 ---
 apiVersion: backstage.io/v1alpha1
-kind: API 
+kind: API
 metadata:
-    name: api3
-    description: API consumes by demo-component1-lib
-
+  name: Api1
+  description: API provided by demo-component1-lib
 spec:
-    type: graphql
-    owner: group:digitalservicing
-    lifecycle: experimental
-    system: notifications
-
-    definition: |
-        schema {
-            query: Query 
-        }
-
-        type Query {
-            hello: String
-        }
-
+  type: openapi
+  owner: group:default/digitalservicing
+  lifecycle: experimental
+  system: notifications
+  definition: |
+    openapi: 3.0.0
+    info:
+      title: Api1
+      version: 1.0.0
+    paths:
+      /demo/example:
+        get:
+          summary: Example endpoint
+          responses:
+            '200':
+              description: success
 ---
-apiVersion: backstage.io
-kind: Resource 
+apiVersion: backstage.io/v1alpha1
+kind: API
 metadata:
-    name: resource-1
-    description: Resource of demo-component1
+  name: api3
+  description: API consumed by demo-component1-lib
 spec:
-    type: websites3-bucket
-    owner: group:digitalservicing
-    lifecycle: production
-    system: examples
+  type: graphql
+  owner: group:default/digitalservicing
+  lifecycle: experimental
+  system: notifications
+  definition: |
+    schema {
+      query: Query
+    }
 
-
-   
+    type Query {
+      hello: String
+    }
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: resource-1
+  description: Resource of demo-component1
+spec:
+  type: websites3-bucket
+  owner: group:default/digitalservicing
+  lifecycle: production
+  system: examples
