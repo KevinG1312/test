@@ -1,14 +1,79 @@
 apiVersion: backstage.io
 kind: Component
 metadata:
-    name: backstage-support-deployable
-    description: Deploy managed identity, and templates
-    annotations: 
-            dev.blala.test: poc-test-test
-            backstage-techdoc-ref: ditr:.
+    name: demo-component1-lib
 spec:
-    type: resource
-    owner: digitalservice/java 
+    type: website
+    system: notification
+    owner: group:digitalservicing
+    lifecycle: experimental
+    providesAPos:
+        - Api1
+    consumesApis:
+        -api3
+    dependsOn:
+        - resource:resource-1
 
-    lifecycle: experimentals
+---
 
+apiVersion: backstage.io/v1alpha1
+kind: API 
+metadata:
+    name: Api1
+    description: API provided by demo-component1-lib
+
+spec:
+    type: openapi
+    owner: group:digitalservicing
+    lifecycle: experimental
+    system: notifications
+
+    definition: |
+        openapi:"3.0.0"
+        info: 
+            title: Api1
+            version: 1.0.0
+        paths: 
+            /demo/example:
+                get:
+                    summary: Example endpoint
+                    responses: 
+                        '200': 
+                            description: success
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API 
+metadata:
+    name: api3
+    description: API consumes by demo-component1-lib
+
+spec:
+    type: graphql
+    owner: group:digitalservicing
+    lifecycle: experimental
+    system: notifications
+
+    definition: |
+        schema {
+            query: Query 
+        }
+
+        type Query {
+            hello: String
+        }
+
+---
+apiVersion: backstage.io
+kind: Resource 
+metadata:
+    name: resource-1
+    description: Resource of demo-component1
+spec:
+    type: websites3-bucket
+    owner: group:digitalservicing
+    lifecycle: production
+    system: examples
+
+
+   
